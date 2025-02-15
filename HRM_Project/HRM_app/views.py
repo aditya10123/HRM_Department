@@ -1,23 +1,28 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import Departmentform,userauthenticationForm
+from .forms import Departmentform,userauthenticationForm,registrationform
 from .models import Department
 from django.contrib.auth import authenticate,login,logout
 
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 def add(request):
-    depart = Department.objects.all()
+    departments = Department.objects.filter(status=True)
+
     if request.method == 'POST':
         fm = Departmentform(request.POST)
         if fm.is_valid():
-            dn=fm.cleaned_data['Department_Name']
-            dd=fm.cleaned_data['Department_Description']
-            reg = Department(Department_Name=dn,Department_Description=dd)
+            dn=fm.cleaned_data['department_name']
+            dd=fm.cleaned_data['department_description']
+            reg = Department(department_name=dn,department_description=dd)
             reg.save()
             fm = Departmentform()  
-    else: 
+    else:
+        departments = Department.objects.filter(status=True)
         fm = Departmentform()   
         
-    return render(request, 'add.html',{'form':fm, 'deprt':depart})
+    return render(request, 'add.html',{'form':fm, 'deprt':departments})
 
 def home(request):
     return render(request,'home.html')
@@ -50,10 +55,16 @@ def logout_details(request):
     return redirect('home')
 
 def delete_product(request, id):
-    deleteMenu=Department.objects.filter(id=id)
-    deleteMenu.delete()
+    deletedept = Department.objects.get(id=id)
+    print('got', deletedept)
+    deletedept.status = False
+    deletedept.save()
+    print() 
+    fm = Departmentform()   
     return redirect('add')
-
+ 
+    
+ 
 
 
 def updateprod(request, id):
@@ -72,3 +83,20 @@ def updateprod(request, id):
         # Initialize the form with the existing product instance
         form = Departmentform(instance=product)
         return render(request, "update.html", {"form": form})
+
+
+def register(request):
+    if request.method=="POST":
+        RF=registrationform(request.POST)
+        if RF.is_valid():
+            RF.save()
+            return redirect('home')
+        else:
+            RF=registrationform()
+            return render(request,"register.html",{"RF":RF,'msg':'Worong credentials...!'})
+    else:
+        RF=registrationform()
+        return render(request,"register.html",{"RF":RF})
+    
+
+

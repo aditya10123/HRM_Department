@@ -2,37 +2,31 @@
 
 {% load static %}
 
+{% block content %}
 
-{% block body %}
-
-    <div class="container text-center p-1 rounded shadow bg-danger">
-        <h2 class="text-white">LOGIN</h2>
+    <div style="text-align: center; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #17a2b8;">
+        <h2 style="color: white; margin: 0;">LOGIN</h2>
     </div>
-    <div class="login-container">
-    <form action="" method="POST" class="form1">
-        {% csrf_token %}
-        {% if msg %}
-                <div class="alert alert-danger">
-                 {{msg}}
+
+    <div style="max-width: 400px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <form action="" method="POST" style="display: flex; flex-direction: column;">
+            {% csrf_token %}
+            
+            {% if msg %}
+                <div style="padding: 10px; margin-bottom: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px;">
+                    {{msg}}
                 </div>
-         
-                {% endif %}
-                {{LDF.as_p}}
-                
-                <input class="card-btn"type="submit">
-    
-        <div class="clickhere">
-            create new account 
-        </div>
-        <div class="clickhere1">
-            <a class="clickhere1" id="login" aria-current="page" href="{% url 'register' %}">click here</a>
-        </div>
+            {% endif %}
+
+            {{LDF.as_p}}
+
+            <input type="submit" value="Login" style="background-color: #007bff; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; width: 100%;">
+            
+            <div style="margin-top: 15px;">
+                <span>Create new account </span>
+                <a href="{% url 'register' %}" style="color: #007bff; text-decoration: none;">click here</a>
+            </div>
+        </form>
     </div>
 
-    </form>
-    </div>
-
-</div>
-
-
-{% endblock body %}
+{% endblock content %}

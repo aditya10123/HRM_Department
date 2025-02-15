@@ -8,10 +8,10 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 class Departmentform(forms.ModelForm):
     class Meta:
         model = Department
-        fields = ['Department_Name','Department_Description']
+        fields = ['department_name','department_description']
         widgets = {
-            'Department_Name' : forms.TextInput(attrs={'class':'form-control'}),
-            'Department_Description' : forms.TextInput(attrs={'class':'form-control'}),
+            'department_name' : forms.TextInput(attrs={'class':'form-control'}),
+            'department_description' : forms.TextInput(attrs={'class':'form-control'}),
         }
 
 class userauthenticationForm (AuthenticationForm):
@@ -21,5 +21,42 @@ class userauthenticationForm (AuthenticationForm):
     class Meta:
         model=User
         fields=['username','password']
+
+class registrationform(UserCreationForm):
+    class Meta:
+        model=User
+        fields=['username','first_name','last_name','email','password1','password2']
+        
+        labels={
+            'username':'Enter Username',
+            'first_name':'Enter first name',
+            'last_name':'Enter Last name',
+            'email':'Enter Email',
+            'password1':'Enter password',
+            'password2':'Enter confirm password',
+        }
+        
+        widgets={
+            'username':forms.TextInput(attrs={'class':'form-control'}),
+            'first_name':forms.TextInput(attrs={'class':'form-control'}),
+            'last_name':forms.TextInput(attrs={'class':'form-control'}),
+            'email':forms.EmailInput(attrs={'class':'form-control'}),
+            'password1':forms.PasswordInput(attrs={'class':'form-control'}),
+            'password2':forms.PasswordInput(attrs={'class':'form-control'}),
+        }
  
-    
+
+class loginform(UserCreationForm):
+    class Meta:
+        model=User
+        fields=['username','password']
+        
+        labels={
+            'username':'Enter Username',
+            'password':'Enter password',
+        }
+        
+        widgets={
+            'username':forms.TextInput(attrs={'class':'form-control'}),
+            'password':forms.PasswordInput(attrs={'class':'form-control'}),
+        }

@@ -1,0 +1,239 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #47ede2;
+    margin: 0;
+    padding: 0;
+}
+
+/* Heading Styling */
+h4 {
+    font-size: 1.8rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Create Department Form */
+#Createdep {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Submit Button */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    margin-left: 250px;
+    width: 120px;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Department Table */
+.table {
+    background: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    animation: slideInUp 1.2s ease-out;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s;
+}
+
+/* Edit and Delete Buttons */
+.btn-warning, .btn-danger {
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, background-color 0.3s;
+}
+
+.btn-warning:hover {
+    background-color: #ffc107;
+    transform: scale(1.1);
+}
+
+.btn-danger:hover {
+    background-color: #dc3545;
+    transform: scale(1.1);
+}
+
+/* Empty Records Alert */
+.alert-info {
+    font-size: 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+#nav1{
+    width: 100%;
+}
+
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.content {
+    padding: 30px;
+    line-height: 1.8;
+}
+.content h1 {
+    color: #4CAF50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+.content p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+.content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #555;
+}
+.content ul li {
+    margin-bottom: 10px;
+}
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #f7f7f7;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+    color: #666;
+}
+.footer a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+.button {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 12px 25px;
+    font-size: 1rem;
+    color: white;
+    background: linear-gradient(to right, #4CAF50, #66BB6A);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.button:hover {
+    background: linear-gradient(to right, #388E3C, #43A047);
+}      
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form1 {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="submit"] {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #138496;
+}
+
+.alert {
+    padding: 10px;
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.clickhere1 {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.create-account-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.create-account-link:hover {
+    text-decoration: underline;
+}
