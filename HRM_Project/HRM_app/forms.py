@@ -1,5 +1,5 @@
 from django import forms
-from .models import Department
+from .models import Department,Roles
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
@@ -59,4 +59,13 @@ class loginform(UserCreationForm):
         widgets={
             'username':forms.TextInput(attrs={'class':'form-control'}),
             'password':forms.PasswordInput(attrs={'class':'form-control'}),
+        }
+
+class Rolesform(forms.ModelForm):
+    class Meta:
+        model = Roles
+        fields = ['role_name','role_description']
+        widgets = {
+            'role_name' : forms.TextInput(attrs={'class':'form-control'}),
+            'role_description' : forms.TextInput(attrs={'class':'form-control'}),
         }
