@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h3 class="text-center alert alert-warning">Add Employee</h3>
+            <form method="POST" enctype="multipart/form-data" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" style="width: 100%; font-size: 18px; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; transition: background 0.3s ease-in-out; cursor: pointer;">
+                    Add Employee
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Employee Table -->
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-bordered shadow" style="width: 100%; border-collapse: collapse; background: #fff;">
+            <thead class="thead-dark">
+                <tr class="text-center" style="background-color: #343a40; color: white;">
+                    <th style="padding: 12px;">Sr. No</th>
+                    <th style="padding: 12px;">First Name</th>
+                    <th style="padding: 12px;">Last Name</th>
+                    <th style="padding: 12px;">Email</th>
+                    <th style="padding: 12px;">Mobile</th>
+                    <th style="padding: 12px;">Department</th>
+                    <th style="padding: 12px;">Role</th>
+                    <th style="padding: 12px;">Reporting Manager</th>
+                    <th style="padding: 12px;">Username</th>
+                    <th style="padding: 12px;">Password</th>
+                    <th style="padding: 12px;">Edit</th>
+                    <th style="padding: 12px;">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr class="text-center" style="background-color: {% cycle 'white' '#f2f2f2' %};">
+                    <td style="padding: 10px;">{{ forloop.counter }}</td>
+                    <td style="padding: 10px;">{{ employee.first_name }}</td>
+                    <td style="padding: 10px;">{{ employee.last_name }}</td>
+                    <td style="padding: 10px;">{{ employee.email }}</td>
+                    <td style="padding: 10px;">{{ employee.mobile }}</td>
+                    <td style="padding: 10px;">{{ employee.dept.department_name }}</td>
+                    <td style="padding: 10px;">{{ employee.role.role_name }}</td>
+                    <td style="padding: 10px;">
+                        {% if employee.reporting_manager %}
+                            {{ employee.reporting_manager.first_name }} {{ employee.reporting_manager.last_name }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px;">{{ employee.username }}</td>
+                    <td style="padding: 10px;">******</td>
+                    <td>
+                        <a href="{% url 'update_emp' employee.employee_id %}" style="display: inline-block; padding: 6px 12px; background-color: #ffc107; color: black; text-decoration: none; border-radius: 5px;">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_employee' employee.employee_id %}" style="display: inline-block; padding: 6px 12px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="12" class="text-center" style="padding: 12px;">No employees found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
