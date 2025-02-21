@@ -1,40 +1,31 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% load static %}
 
+{% block body %}
 
-{% block content %}
-
-
-<div class="container my-3 p-5 w-50 shadow">
-    <div class="container text-center p-1 rounded shadow bg-info">
-        <h2 class="text-white">LOGIN</h2>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f4f4f4;">
+    <div style="text-align: center; background: #17a2b8; margin-top: 20px; width: 50%; padding: 15px; border-radius: 5px;">
+        <h2 style="color: white; margin: 0;">User Login</h2>
     </div>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {% if msg %}
-                <div class="alert alert-danger">
-                 {{msg}}
-                </div>
-         
-                {% endif %}
-                {{LDF.as_p}}
-                
-                <input class="card-btn"type="submit">
-      
-    </form>
-    <div class="clickhere1">
-        <span>Create new account </span>
-        <a class="create-account-link" id="login" href="{% url 'register' %}">click here</a>
+    <div style="background: white; padding: 30px; width: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border-radius: 10px; margin-top: 20px;">
+        <form action="" method="POST" style="display: flex; flex-direction: column; align-items: center;">
+            {% csrf_token %}
+            {{ LDF.as_p }}
+            <p><input type="submit" style="background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 18px;" value="Login"></p>
+            <div style="margin-top: 20px; text-align: center;">
+                <h5 style="margin-bottom: 5px;">Don't have an account?</h5>
+                <a href="{% url 'register' %}" style="color: #007bff; text-decoration: none; font-weight: bold;">Register</a>
+                <br>
+                <h5 style="margin-top: 15px; margin-bottom: 5px;">Forgot password?</h5>
+                <a href="{% url 'forget_password' %}" style="color: #007bff; text-decoration: none; font-weight: bold;">Reset Password</a>
+            </div>
+            {% if msg %}
+            <div style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 15px; width: 100%; text-align: center;">
+                {{ msg }}
+            </div>
+            {% endif %}
+        </form>
     </div>
-
 </div>
 
-
-{% endblock content %}
-
-
-
-
-
-
+{% endblock body %}

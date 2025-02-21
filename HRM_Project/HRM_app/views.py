@@ -1,10 +1,14 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
 from .forms import Departmentform,userauthenticationForm,registrationform,Rolesform,EmployeeForm
 from .models import Department,Roles,Employe_User
 from django.contrib.auth import authenticate,login,logout
 
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.utils.encoding import force_bytes,force_str
+from django.conf import settings
 
 # Create your views here.
 def add(request):
@@ -321,4 +325,66 @@ def update_employee(request,emp_id):
        
         form = EmployeeForm(instance=employee)
         return render(request, "update_emp.html", {"form": form})
+
+
+
+def forget_password(request):
+    if request.method =='POST':
+        email = request.POST['email']
+        user = Employe_User.objects.filter(email=email).first()
+        if user: 
+            
+            token = default_token_generator.make_token(user)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            
+            reset_url = request.build_absolute_uri(f'/reset_password/{uidb64}/{token}/')
+                                                   
+            send_mail(
+            'Password Reset',
+            f'Click the given link to reset your password: {reset_url}',
+            settings.EMAIL_HOST_USER, # Use a verified email address
+            [email],
+            fail_silently=False,
+             )
+            return redirect('passwordresetdone')
+        else:
+           
+           
+           messages.success(request,'please enter valid email address')
+
+    return render(request,'forgetpass.html')
+
+def reset_password(request, uidb64, token):
+
+    if request.method == 'POST':
+       
+       password = request.POST['password']
+       print(password)
+       password2 = request.POST['password2']
+       print(password2)
+       if password == password2:  
+        try:
+      
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = Employe_User.objects.get(pk=uid)
+
+            if default_token_generator.check_token(user, token):
+             
+             user.set_password(password)
+             user.save()
+             return redirect('passwordresetdone')
+            else: 
+             return HttpResponse('Token is invalid',status=400)
+        except (TypeError, ValueError, OverflowError, Employe_User.DoesNotExist):
+           return HttpResponse('Invalid link', status=400)
+       else:
+          
+          return HttpResponse('Passwords do not match', status=400)
+    return render(request,'password_rest.html')
+
+def password_reset_done(request):
+    return render (request,'password_reset_done.html')
+
+      
+
 

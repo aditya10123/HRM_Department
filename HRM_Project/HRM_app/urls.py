@@ -13,8 +13,11 @@ urlpatterns = [
      path('deleterole/<int:id>/', views.deleterole, name='deleterole'), 
      path('updaterole/<int:id>/',views.updaterole,name='updaterole'),
      path('employees/', views.create_employee, name='employee_list'),
-    path('delete_employee/<int:emp_id>/',views.delete_employee,name='delete_employee'),
-     path('update_emp/<int:emp_id>/', views.update_employee, name='update_emp')
+     path('delete_employee/<int:emp_id>/',views.delete_employee,name='delete_employee'),
+     path('update_emp/<int:emp_id>/', views.update_employee, name='update_emp'),
+     path('forget_password/',views.forget_password,name='forget_password'),
+     path('reset_password/<uidb64>/<token>/',views.reset_password,name='resetpassword'),
+     path('password_reset_done/',views.password_reset_done,name='passwordresetdone'),
 
 
 ]

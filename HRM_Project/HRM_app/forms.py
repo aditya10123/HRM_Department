@@ -22,6 +22,8 @@ class userauthenticationForm (AuthenticationForm):
         model=User
         fields=['username','password']
 
+
+
 class registrationform(UserCreationForm):
     class Meta:
         model=User
