@@ -19,6 +19,19 @@ urlpatterns = [
      path('reset_password/<uidb64>/<token>/',views.reset_password,name='resetpassword'),
      path('password_reset_done/',views.password_reset_done,name='passwordresetdone'),
 
+     path('task_list/', views.task_list, name='task_list'),
+     path('task/create/', views.task_create, name='task_create'),
+     path('task/update/<int:task_id>/', views.task_update, name='task_update'),
+     path('task/delete/<int:task_id>/', views.task_delete, name='task_delete'),
+     path('task/assign/', views.assign_task, name='assign_task'),
+     
+    
+
+
+     # path('add_review/', views.add_review, name='add_review'),
+     # path('review_list/', views.review_list, name='review_list'),
+     # path('<int:review_id>/edit/', views.edit_review, name='edit_review'),
+     # path('<int:review_id>/delete/', views.delete_review, name='delete_review'),
 
 ]
 
